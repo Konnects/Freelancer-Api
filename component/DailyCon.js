@@ -21,7 +21,8 @@ class ListCon extends Component {
         // console.log(data)
         Axios({
             method: "GET",
-            url: "https://api.fluxgen.in/aquagen/v1/industries/" + data.data.industry_id + "/consumption/latest",
+            //  url: "https://api.fluxgen.in/aquagen/v1/industries/" + data.data.industry_id + "/consumption/latest",
+             url: "https://api.fluxgen.in/aquagen/v1/industries/GKN1/total_consumption?duration=daily",
             headers: {
                 "Authorization": data.data.token
             }
@@ -32,16 +33,15 @@ class ListCon extends Component {
     }
   render() {
     const { data } = this.state;
-
-    if (data.units && data.units.length) {
+    // console.log("Heylo",data.units," ")
+    if (data && data.length) {
         var list = []
-        Object.values(data.units).map((value) => {
-            Object.entries(value).map((item, key) => {
-                list.push(item)
-            })
+        
+        Object.entries(data).map((item, key) => {
+            list.push(item)
         })
-
-        // console.log("Hi",list)
+        // console.log("hi", list)
+        
         return (
             <ImageBackground source={require('../assets/background.jpeg')} style={{ flex: 1, width: null, height: null }}>
                 <View style={styles.container}>
@@ -52,13 +52,14 @@ class ListCon extends Component {
                     <ScrollView >
                         {
                             Object.values(list).map((item, key) => {
-                                if(item[1].unit_name.toUpperCase().includes(this.state.search.toUpperCase()) || this.state.search === '')
+                                console.log("Hey",item[1])
+                                if(item[1].category.toUpperCase().includes(this.state.search.toUpperCase()) || this.state.search === '')
                                 
                                 {
 
                                 return (
                                     <View key={key} style={{ backgroundColor: '#FFFFFF', borderRadius: 15, margin: 15, shadowOpacity: 1, shadowRadius: 15 }}>
-                                        <Text style={{ marginLeft: 15, textDecorationStyle: 'solid', marginBottom: 15, marginTop: 15 }}>{item[1].unit_name}</Text>
+                                        <Text style={{ marginLeft: 15, textDecorationStyle: 'solid', marginBottom: 15, marginTop: 15 }}>{item[1].category}</Text>
                                         <View 
                                             style={{
                                                 borderBottomColor: '#2C2B2B',
@@ -66,12 +67,12 @@ class ListCon extends Component {
                                                 borderBottomWidth: StyleSheet.hairlineWidth,
                                             }}
                                         />
-                                        <View style={{ flexDirection: 'row', margin: 10 }}>
-                                            <View style={{ flexDirection: 'column' }}>
+                                        <View style={{ flexDirection: 'row', margin: 10 ,alignContent: "center", justifyContent:"center", alignSelf: "center"}}>
+                                            <View style={{ flexDirection: 'column', alignContent: "center", justifyContent:"center", alignSelf: "center" }}>
 
                                                 <Text style={styles.texttitle}   >Consumption</Text>
                                                 <Text style={styles.textvalue}>
-                                                    {item[1].consumption/1000} kl
+                                                    {item[1].total_consumption/1000} kl
                                                 </Text>
 
                                                 <Text style={styles.texttitle} >Cost</Text>
@@ -82,7 +83,7 @@ class ListCon extends Component {
 
                                                
                                             </View>
-                                            <View style={{ flexDirection: 'column' }}>
+                                            {/* <View style={{ flexDirection: 'column' }}>
 
 
                                                 <Text style={styles.texttitle} >Process </Text>
@@ -96,7 +97,7 @@ class ListCon extends Component {
                                                 <Text style={styles.textvalue}>
                                                     {item[1].unit_id}
                                                 </Text>
-                                            </View>
+                                            </View> */}
                                         </View>
                                     </View>
                                 )
@@ -111,6 +112,7 @@ class ListCon extends Component {
             } else {
                 return (<ImageBackground source={require('../assets/loading.gif')} style={{ width: null, height: null }} />)
             }
+
 
 
 

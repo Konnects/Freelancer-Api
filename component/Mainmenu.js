@@ -8,6 +8,10 @@ import App from '../App';
 import ListCon from './ListCon';
 import { Icon } from 'native-base';
 
+import DailyCon from './DailyCon';
+import MonthlyCon from './MonthlyCon';
+import WeeklyCon from './WeeklyCon';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -23,7 +27,7 @@ class Mainmenu extends Component {
     ListStackScreen() {
         return (
             <Stack.Navigator>
-                <Stack.Screen name="List" component={ListCon} options={{
+                <Stack.Screen name="List" component={WeeklyCon} options={{
                     headerTitleAlign :'center',
                     headerRight: () => (
                         <Icon name="md-log-out" onPress={() => {this.setState({disconnect : true})}} />
