@@ -7,6 +7,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import App from '../App';
 import ListCon from './ListCon';
 import { Icon } from 'native-base';
+import HomeScreen from './HomeScreen';
+
 
 import DailyCon from './DailyCon';
 import MonthlyCon from './MonthlyCon';
@@ -26,20 +28,12 @@ class Mainmenu extends Component {
 
     ListStackScreen() {
         return (
-            <Stack.Navigator>
-                <Stack.Screen name="List" component={WeeklyCon} options={{
-                    headerTitleAlign :'center',
-                    headerRight: () => (
-                        <Icon name="md-log-out" onPress={() => {this.setState({disconnect : true})}} />
-                    ),
-                    
-                    headerStatusBarHeight: 5,
-                    headerStyle: {
-                        backgroundColor: '#041a48'
-                    }
-                }} />
-                
+            <Stack.Navigator> 
+                <Stack.Screen  name="Home Screen" component={HomeScreen}/>
                 <Stack.Screen  name="Connexion" component={App}/>
+                <Stack.Screen  name="Daily Con" component={DailyCon}/>
+                <Stack.Screen  name="Weekly Con" component={WeeklyCon}/>
+                <Stack.Screen  name="Monthly Con" component={MonthlyCon}/>
             </Stack.Navigator>
         )
     }

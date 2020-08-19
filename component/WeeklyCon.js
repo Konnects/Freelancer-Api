@@ -46,8 +46,8 @@ class ListCon extends Component {
             <ImageBackground source={require('../assets/background.jpeg')} style={{ flex: 1, width: null, height: null }}>
                 <View style={styles.container}>
                     <View style={styles.firstBox}>
-                        <Text2 style={{ textAlign: 'center', fontSize: 25, color: "#EBEBEB" }}>Consumption: {data.total_consumption/1000} kl</Text2>
-                        <Text2 style={{ textAlign: 'center', fontSize: 20, color: "#CFCFCF" }}>Cost: ₹ {data.total_cost}</Text2>
+                        <Text2 style={{ textAlign: 'center', fontSize: 25, color: "#EBEBEB" }}>Consumption: {this.props.route.params.totalConsumption} kl</Text2>
+                        <Text2 style={{ textAlign: 'center', fontSize: 20, color: "#CFCFCF" }}>Cost: ₹ {data.totalCost}</Text2>
                     </View>
                     <ScrollView >
                         {
